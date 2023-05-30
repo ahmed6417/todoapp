@@ -1,0 +1,276 @@
+html {
+    background: #000;
+    height: 100%;
+    display: grid;
+}
+* {
+    margin: 0;
+    font-family: monospace;
+}
+
+body {
+    max-width: 85%;
+    margin: auto;
+}
+
+
+
+
+li.checked {
+    opacity: 0.2;
+}
+
+span.done {
+    display: block;
+    background: red;
+    margin-bottom: 50px;
+}
+li {
+    display: flex;
+    gap: 25px;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+    font-weight: 800;
+}
+
+.todoApp-sec {
+    background: #ececec;
+    padding: 30px;
+    box-shadow: 0 3px 100px 20px rgb(0 239 69 / 15%);
+}
+
+ul#appContent {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    color: #00ff45;
+    padding: 0;
+}
+
+.powerewd {
+    color: #373837;
+    margin: 40px;
+    border-radius: 50px;
+    padding: 0px 50px;
+    padding-right: 15px !important;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    position: fixed;
+    width: 100%;
+    right: 0;
+    justify-content: flex-end;
+    bottom: 0;
+}
+
+img.sprints-logo {
+    max-width: 90px;
+    filter: grayscale(1);
+}
+
+li {
+    background: #000;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+input {
+    border: solid 1px #818181;
+    background: #0000;
+    padding: 4px 15px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+}
+
+span.addBtn {
+    background: #c2c2c285;
+    padding: 10px 25px;
+    border-radius: 7px;
+    border: 0;
+}
+
+.switch-mode {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+}
+
+.lightmode {
+    background: #fff;
+    height: 100%;
+    display: grid;
+}
+
+span#gicons {
+    background: #ebebeb;
+    border-radius: 400px;
+    padding: 7px;
+    cursor: pointer;
+}
+
+
+
+h1.mycalch1 {
+    font-family: monospace;
+    font-size: 35px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+#ggle-icon {
+    font-size: 40px;
+    position: relative;
+    bottom: -11px;
+    margin-right: 7px;
+}
+
+
+p.mycalch1 {
+    font-family: monospace;
+    margin-top: 10px;
+    max-width: 100%;
+    text-align: left;
+    margin: auto;
+}
+
+
+
+
+/* Animation */
+/* I will try to describe it for sprinters*/
+
+
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 90deg;
+    inherits: true;
+    }
+    
+    @property --gradX {
+    syntax: '<percentage>';
+    initial-value: 50%;
+    inherits: true;
+    }
+    
+    @property --gradY {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: true;
+    }
+    
+    
+    :root {
+        --d: 2500ms;
+        --angle: 90deg;
+        --gradX: 100%;
+        --gradY: 50%;
+        --c1: rgba(168, 239, 255, 1);
+        --c2: rgba(168, 239, 255, 0.1);
+    }
+    
+    
+    .todoApp-sec {
+        border: 3px solid;
+        /* Please note that i used here A conic gradient "CONE" which is a gradient with color transitions rotated around a center point. */
+        border-image: conic-gradient(
+        from 
+        var(--angle),/*By default,angle is 0deg starting point and position in center by defult*/
+        rgb(0 239 69),/*First Color to move*/
+        rgb(0 239 69),/*Another Color*/
+        rgb(0 239 69),/*Another Color to move*/
+        #0000 0.1turn)/*Border color with turn which have a 1 maximum value which represent the hollow area*/
+        30; /**/
+        
+        animation: borderRotate var(--d) linear infinite forwards;
+        box-shadow: 0 3px 100px 20px rgb(0 239 69 / 15%);
+    }
+    
+    
+    @keyframes borderRotate {
+        100% {
+            --angle: 420deg;
+        }
+    }
+    
+    
+
+
+    /* media query */
+
+@media only screen and (max-width: 900px) {
+    span.addBtn {
+        margin-top: 1px;
+        display: block;
+        width: max-content;
+    }
+
+    .powerewd {
+        margin: 0;
+        padding: 0 !important;
+        display: grid;
+        align-items: center;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        bottom: 50px;
+        position: inherit;
+        margin-top: 50px;
+    }
+
+    body {
+        padding: 80px 0px;
+    }
+
+    input#firstNumber {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    input#secondNumber {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    span#pre {
+        display: none;
+    }
+
+    .calculator-app {
+        margin: 0;
+        background: #ececec;
+        border-radius: 0px;
+        padding: 30px;
+    }
+
+
+
+    h3 {
+    margin-bottom: 0;
+    margin-top: 0;
+    text-align: center;
+    font-size: 50px;
+}
+
+p.mycalch1 {
+    max-width: 100%;
+}
+
+    .input-group-prepend {
+        text-align: center;
+    }
+
+    h1.mycalch1 {
+        font-size: 25px;
+    }
+
+
+
+    
+}
