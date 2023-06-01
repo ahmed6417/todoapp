@@ -26,12 +26,14 @@ function newinput() {
     
     var item = document.createElement("DIV");
     item.className = "item";
+    item.contentEditable = "true";
     item.appendChild(t);
     li.appendChild(item);
     
     
     var prio = document.createElement("DIV");
     prio.className = "prior";
+    prio.contentEditable = "true";
     prio.appendChild(p);
     li.appendChild(prio);
 
@@ -110,13 +112,6 @@ div.remove();
 
 
 
-// CheckList Section
-// var list = document.querySelector("ul");
-// list.addEventListener('click', function(ev) {
-// if (ev.target.tagName === 'LI') {
-// ev.target.classList.toggle('checked');
-// }
-// }, false);
 
 
 
@@ -138,3 +133,20 @@ $('#dmode').click(function() {
 
 
 
+// function addToLocalStorage(todos) {
+//     localStorage.setItem('todos', JSON.stringify(todos));
+//     renderTodos(todos);
+// }
+
+
+
+
+
+// CheckList Section
+// var list = document.querySelector("ul");
+// console.log (list);
+// list.addEventListener('click', function(ev) {
+// if (ev.target.tagName === 'LI') {
+// ev.target.classList.toggle('checked');
+// }
+// }, false);
