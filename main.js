@@ -143,10 +143,10 @@ $('#dmode').click(function() {
 
 
 // CheckList Section
-// var list = document.querySelector("ul");
-// console.log (list);
-// list.addEventListener('click', function(ev) {
-// if (ev.target.tagName === 'LI') {
-// ev.target.classList.toggle('checked');
-// }
-// }, false);
+var list = document.querySelector("ul");
+console.log (list);
+list.addEventListener('click', function(ev) {
+if (ev.target.tagName === 'LI') {
+ev.target.classList.toggle('checked');
+}
+}, false);

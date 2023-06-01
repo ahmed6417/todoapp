@@ -112,6 +112,21 @@ span#gicons {
     cursor: pointer;
 }
 
+.item {
+    inline-size: 400px;
+    overflow-wrap: break-word;
+}
+
+strong {
+    color: #E91E63;
+}
+
+
+span.close {
+    cursor: pointer;
+}
+
+
 
 
 h1.mycalch1 {
