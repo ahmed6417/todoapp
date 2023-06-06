@@ -16,7 +16,9 @@ body {
     margin: auto;
 }
 
-
+.tasks-content {
+    margin-top: 20px;
+}
 
 
 li.checked {
