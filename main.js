@@ -1,119 +1,127 @@
 
-function newinput() {
-
-    var li = document.createElement("li");
-    var inputValue = document.getElementById("myInput").value;
-    var inputPriority = document.getElementById("priority").value;
-    var t = document.createTextNode(inputValue);
-    var p = document.createTextNode(inputPriority);
+let listItem = localStorage.getItem('tasks')? 
+JSON.parse(localStorage.getItem('tasks')):[];
 
 
-    var span = document.createElement("SPAN");
-    var txt = document.createTextNode("×");
-
-    span.className = "close";
-    span.appendChild(txt);
-    li.appendChild(span);
-    
-    for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-        var div = this.parentElement;
-        div.remove();
+document.querySelector('.add').addEventListener('click',function (e) {
+    const taskName=document.getElementById('task-Name').value;
+    const prior = document.getElementById('prio').value;
+    if (taskName=="" || prior=="") {
+    alert("Please Correct your inputs.")
+    }else if (prior>5 || prior==0){
+    alert("Please choose alower priority value (1 to 5)")
     }
+    else{
+    createItem(taskName,prior);
     }
-    
-    
-    
-    var item = document.createElement("DIV");
-    item.className = "item";
-    item.contentEditable = "true";
-    item.appendChild(t);
-    li.appendChild(item);
-    
-    
-    var prio = document.createElement("DIV");
-    prio.className = "prior";
-    prio.contentEditable = "true";
-    prio.appendChild(p);
-    li.appendChild(prio);
+})  
 
 
-
-
-    if (inputValue === '') {
-    alert("You must write any task!");
-    } 
-
-    else if (inputPriority === '') {
-    alert("You must write any priority!");
+function createItem(taskName,prio){
+    const task={
+        taskName:taskName,
+        Priority:prio,
     }
-    
-    else {
-    document.getElementById("appContent").appendChild(li);
-    }
-
-    document.getElementById("myInput").value = "";
-    document.getElementById("priority").value = "";
-
-    
-
-
-    // var done = document.createElement("SPAN");
-    // var doneTxt = document.createTextNode("Done");
-
-    // done.setAttribute("id", "done");
-    // done.className = "done";
-    // done.appendChild(doneTxt);
-    // li.appendChild(done);
-
-
-
-    var span = document.createElement("SPAN");
-    var txt = document.createTextNode("×");
-
-    span.className = "close";
-    span.appendChild(txt);
-    // li.appendChild(span);
-    
-    for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-        var div = this.parentElement;
-        div.remove();
-    }
-    }
-
-
-    }
-
-
-
-// close Section
-var myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-myNodelist[i].appendChild(span);
+    listItem.push(task);
+    localStorage.setItem('tasks', JSON.stringify(listItem));
+    location.reload();
 }
 
 
-
-// close functionality
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-close[i].onclick = function() {
-var div = this.parentElement;
-div.remove();
+function displayItemToPage(){
+    let task='';
+    for(let i=0 ; i< listItem.length ; i++){
+            task+=`
+        <div class="task-content">
+            <input type="text" class='task-name' disabled='true' value="${listItem[i].taskName}"  >
+            <input type="number" class='Priority'  disabled='true' value=${listItem[i].Priority} >
+            <span class="action">
+                <button class="edit">Edit</button>
+                <button class="delete">Delete</button>
+            </span>
+            <span class="update">
+                <button class="save">Save</button>
+            </span>
+            </div>
+        `
+    }
+    document.querySelector('.tasks-content').innerHTML+=task;
+    deleteTask();
+    editTask();
+    activateSaveBtn();
+    activateCancleBtn();
+    sortTasks();
 }
+function deleteTask (){
+    const deleteBtn=document.querySelectorAll('.delete');
+    deleteBtn.forEach( function (element,i) {
+        element.addEventListener('click',()=>{
+            deletItem(i);
+        })
+    });
 }
+function deletItem (index){
+    listItem.splice(index,1);
+    localStorage.setItem('tasks', JSON.stringify(listItem));
+    location.reload();
+}
+function editTask (){
+    const editBtn=document.querySelectorAll('.edit');
+    const updateDiv=document.querySelectorAll('.update');
+    const taskNameInput= document.querySelectorAll('.task-name')
+    const priorityInput= document.querySelectorAll('.Priority')
+    editBtn.forEach((element,i)=>{
+        element.addEventListener('click',(e)=>{
+            updateDiv[i].style.display='inline-block';
+            taskNameInput[i].disabled=false;
+            priorityInput[i].disabled=false;
+        })
+    });
+}
+function activateSaveBtn(){
+    const saveBtn=document.querySelectorAll('.save');
+    const taskNameInput= document.querySelectorAll('.task-name');
+    const priorityInput= document.querySelectorAll('.Priority');
+    saveBtn.forEach((element,i)=>{
+        element.addEventListener('click',()=>{
+            updateTask(taskNameInput[i].value,priorityInput[i].value,i);
+        })
+    })
+}
+function updateTask(taskName,priority,index){
+    listItem[index].taskName=taskName;
+    listItem[index].Priority=priority;
+    localStorage.setItem('tasks',JSON.stringify(listItem));
+    location.reload();
+}
+function activateCancleBtn () {
+    const cancleBtn=document.querySelectorAll('.cancle')
+    const updateDiv=document.querySelectorAll('.update');
+    const taskNameInput= document.querySelectorAll('.task-name')
+    const priorityInput= document.querySelectorAll('.Priority')
+    cancleBtn.forEach((element,i)=>{
+        element.addEventListener('click',()=>{
+            updateDiv[i].style.display='none';
+            taskNameInput[i].disabled=true;
+            priorityInput[i].disabled=true;
+
+        })
+    })
+}
+function sortTasks (){
+    const sortPriority=document.getElementById('Priority-item');
+    sortPriority.addEventListener('click',(e)=>{
+    const sortedList=listItem.sort((firstItem, secondItem) => firstItem.Priority - secondItem.Priority);
+    localStorage.setItem('tasks',JSON.stringify(sortedList));
+    
+    location.reload();
 
 
-
-
-
-
-
-
-
+    })
+}
+window.onload = function(){
+    displayItemToPage();
+}
 
 
 // Change background
@@ -132,21 +140,3 @@ $('#dmode').click(function() {
 
 
 
-
-// function addToLocalStorage(todos) {
-//     localStorage.setItem('todos', JSON.stringify(todos));
-//     renderTodos(todos);
-// }
-
-
-
-
-
-// CheckList Section
-var list = document.querySelector("ul");
-console.log (list);
-list.addEventListener('click', function(ev) {
-if (ev.target.tagName === 'LI') {
-ev.target.classList.toggle('checked');
-}
-}, false);

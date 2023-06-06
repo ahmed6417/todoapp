@@ -1,3 +1,6 @@
+
+
+
 html {
     background: #000;
     height: 100%;
@@ -83,8 +86,13 @@ input {
     background: #0000;
     padding: 4px 15px;
     border-radius: 50px;
-    margin-bottom: 10px;
 }
+
+.todo-body {
+    margin-top: 30px;
+}
+
+
 
 span.addBtn {
     background: #c2c2c285;
@@ -152,6 +160,52 @@ p.mycalch1 {
     margin: auto;
 }
 
+.sort {
+    background: #ebebeb;
+    border-radius: 400px;
+    padding: 10px 20px;
+    font-family: monospace;
+    cursor: pointer;
+}
+
+.switch-mode {
+    display: flex;
+    gap: 10px;
+}
+
+
+
+.task-content > input {
+    border: 0;
+    padding: 0;
+    color: #00ff45;
+}
+
+
+
+.task-content {
+    display: flex;
+    gap: 25px;
+    background: #000;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding: 10px;
+    border-radius: 8px;
+    align-items: center;
+}
+
+button {
+    color: #00ff45;
+    background: #0000;
+    border: 0;
+}
+
+span.update {
+    display: none;
+    background: #000;
+    filter: invert(1);
+    border-radius: 400px;
+}
 
 
 
@@ -284,6 +338,8 @@ p.mycalch1 {
     h1.mycalch1 {
         font-size: 25px;
     }
+
+
 
 
 
